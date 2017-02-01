@@ -22,15 +22,6 @@ public enum MotionRecognizerState: Int {
     
     /// Motion ended
     case ended = 3
-    
-    /// Motion cancelled
-    case cancelled = 4
-    
-    /// Motion recognition failed
-    case failed = 5
-    
-    
-//    public static var recognized: MotionRecognizerState { get }
 
 }
 
