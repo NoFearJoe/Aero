@@ -35,6 +35,7 @@ public enum MotionRecognizerState: Int {
 }
 
 
+/// Base class for all motion recognizers
 open class MotionRecognizer: NSObject {
 
     public typealias Subscriber = AnyHashable
@@ -46,7 +47,11 @@ open class MotionRecognizer: NSObject {
     public var isEnabled: Bool = true
     
     /// Current recognizer state
-    public var state: MotionRecognizerState = .possible
+    fileprivate(set) var state: MotionRecognizerState = .possible {
+        didSet {
+            notifySubscribers()
+        }
+    }
     
     
     public init(subscriber: Subscriber, action: Action) {
@@ -62,6 +67,14 @@ open class MotionRecognizer: NSObject {
     
     open func unsubscribe(subscriber: Subscriber) {
         self.subscribers.removeValue(forKey: subscriber)
+    }
+    
+    
+    fileprivate func notifySubscribers() {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else  { return }
+            self.subscribers.values.forEach { $0?(self) }
+        }
     }
 
 }
