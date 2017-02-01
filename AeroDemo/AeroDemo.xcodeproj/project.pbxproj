@@ -14,6 +14,7 @@
 		96E8EB691E41C0FF00A3CBB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E8EB671E41C0FF00A3CBB9 /* LaunchScreen.storyboard */; };
 		96E8EB761E41C9D800A3CBB9 /* MotionRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E8EB751E41C9D800A3CBB9 /* MotionRecognizer.swift */; };
 		96E8EB781E41D4E100A3CBB9 /* TiltRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E8EB771E41D4E100A3CBB9 /* TiltRecognizer.swift */; };
+		96E8EB7A1E41EEC800A3CBB9 /* CMRotationMatrix+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E8EB791E41EEC800A3CBB9 /* CMRotationMatrix+Transform.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		96E8EB6A1E41C0FF00A3CBB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96E8EB751E41C9D800A3CBB9 /* MotionRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MotionRecognizer.swift; path = ../Source/MotionRecognizer.swift; sourceTree = SOURCE_ROOT; };
 		96E8EB771E41D4E100A3CBB9 /* TiltRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiltRecognizer.swift; path = ../Source/TiltRecognizer.swift; sourceTree = SOURCE_ROOT; };
+		96E8EB791E41EEC800A3CBB9 /* CMRotationMatrix+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CMRotationMatrix+Transform.swift"; path = "../Source/CMRotationMatrix+Transform.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				96E8EB751E41C9D800A3CBB9 /* MotionRecognizer.swift */,
 				96E8EB771E41D4E100A3CBB9 /* TiltRecognizer.swift */,
+				96E8EB791E41EEC800A3CBB9 /* CMRotationMatrix+Transform.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96E8EB7A1E41EEC800A3CBB9 /* CMRotationMatrix+Transform.swift in Sources */,
 				96E8EB781E41D4E100A3CBB9 /* TiltRecognizer.swift in Sources */,
 				96E8EB611E41C0FF00A3CBB9 /* ViewController.swift in Sources */,
 				96E8EB761E41C9D800A3CBB9 /* MotionRecognizer.swift in Sources */,

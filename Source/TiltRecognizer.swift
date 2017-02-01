@@ -23,6 +23,7 @@ open class TiltRecognizer: MotionRecognizer {
     
     
     fileprivate let motionManager: CMMotionManager
+    fileprivate let operationQueue = OperationQueue()
     
     
     override init(subscriber: Subscriber, action: Action) {
@@ -37,7 +38,7 @@ open class TiltRecognizer: MotionRecognizer {
     fileprivate func setupMotionManager() {
         if motionManager.isDeviceMotionAvailable {
             motionManager.deviceMotionUpdateInterval = 0.01
-            motionManager.startDeviceMotionUpdates(to: OperationQueue()) { [weak self] (motion, error) in
+            motionManager.startDeviceMotionUpdates(to: operationQueue) { [weak self] (motion, error) in
                 if let motion = motion {
                     self?.attitude = motion.attitude
                 }

@@ -62,7 +62,7 @@ open class MotionRecognizer: NSObject {
     
     
     fileprivate func notifySubscribers() {
-        DispatchQueue.main.async { [weak self] in
+        OperationQueue.main.addOperation { [weak self] in
             guard let `self` = self else  { return }
             self.subscribers.values.forEach { $0?(self) }
         }
