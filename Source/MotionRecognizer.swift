@@ -38,7 +38,7 @@ open class MotionRecognizer: NSObject {
     public var isEnabled: Bool = true
     
     /// Current recognizer state
-    fileprivate(set) var state: MotionRecognizerState = .possible {
+    internal(set) var state: MotionRecognizerState = .possible {
         didSet {
             notifySubscribers()
         }
