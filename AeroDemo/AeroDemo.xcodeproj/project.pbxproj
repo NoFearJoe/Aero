@@ -80,9 +80,9 @@
 			children = (
 				96E8EB751E41C9D800A3CBB9 /* MotionRecognizer.swift */,
 				96E8EB771E41D4E100A3CBB9 /* TiltRecognizer.swift */,
-				96E8EB791E41EEC800A3CBB9 /* CMRotationMatrix+Transform.swift */,
 				963148431E431154004E1066 /* AirGestureRecognizer.swift */,
 				963148451E4311DC004E1066 /* RotationRecognizer.swift */,
+				96E8EB791E41EEC800A3CBB9 /* CMRotationMatrix+Transform.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";

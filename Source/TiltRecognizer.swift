@@ -40,12 +40,14 @@ open class TiltRecognizer: MotionRecognizer {
             motionManager.deviceMotionUpdateInterval = 0.01
             motionManager.startDeviceMotionUpdates(to: operationQueue) { [weak self] (motion, error) in
                 OperationQueue.main.addOperation { [weak self] in
-                    if let motion = motion {
-                        self?.attitude = motion.attitude
-                    }
+                    self?.handleMotion(motion, error: error)
                 }
             }
         }
+    }
+    
+    fileprivate func handleMotion(_ motion: CMDeviceMotion?, error: Error?) {
+        attitude = motion?.attitude
     }
 
 }

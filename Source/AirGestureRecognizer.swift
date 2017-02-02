@@ -31,7 +31,13 @@ open class AirGestureRecognizer: MotionRecognizer {
     fileprivate let operationQueue = OperationQueue()
     
     
-    fileprivate var recognized: Bool = false
+    fileprivate var recognized: Bool = false {
+        didSet {
+            if recognized {
+                state = .changed
+            }
+        }
+    }
     
     
     override init(subscriber: Subscriber, action: Action) {
@@ -48,34 +54,21 @@ open class AirGestureRecognizer: MotionRecognizer {
             motionManager.deviceMotionUpdateInterval = 0.02
             motionManager.startDeviceMotionUpdates(to: operationQueue) { [weak self] (motion, error) in
                 OperationQueue.main.addOperation { [weak self] in
-                    guard let `self` = self else { return }
-                    
-                    if let acceleration = motion?.userAcceleration {
-                        switch self.axis {
-                        case .vertical:
-                            if !self.recognized && (self.direction == .positive && acceleration.y >= self.treshold || self.direction == .negative && acceleration.y <= -self.treshold) {
-                                self.state = .changed
-                                self.recognized = true
-                            } else {
-                                self.recognized = false
-                            }
-                        case .horizontal:
-                            if !self.recognized && (self.direction == .positive && acceleration.x >= self.treshold || self.direction == .negative && acceleration.x <= -self.treshold) {
-                                self.state = .changed
-                                self.recognized = true
-                            } else {
-                                self.recognized = false
-                            }
-                        case .longitudinally:
-                            if !self.recognized && (self.direction == .positive && acceleration.z >= self.treshold || self.direction == .negative && acceleration.z <= -self.treshold) {
-                                self.state = .changed
-                                self.recognized = true
-                            } else {
-                                self.recognized = false
-                            }
-                        }
-                    }
+                    self?.handleMotion(motion, error: error)
                 }
+            }
+        }
+    }
+    
+    fileprivate func handleMotion(_ motion: CMDeviceMotion?, error: Error?) {
+        if let acceleration = motion?.userAcceleration {
+            switch self.axis {
+            case .vertical:
+                recognized = !recognized && (direction == .positive && acceleration.y >= treshold || direction == .negative && acceleration.y <= -treshold)
+            case .horizontal:
+                recognized = !recognized && (direction == .positive && acceleration.x >= treshold || direction == .negative && acceleration.x <= -treshold)
+            case .longitudinally:
+                recognized = !recognized && (direction == .positive && acceleration.z >= treshold || direction == .negative && acceleration.z <= -treshold)
             }
         }
     }

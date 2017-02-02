@@ -35,12 +35,15 @@ open class RotationRecognizer: MotionRecognizer {
             motionManager.deviceMotionUpdateInterval = 0.01
             motionManager.startDeviceMotionUpdates(to: operationQueue) { [weak self] (motion, error) in
                 OperationQueue.main.addOperation { [weak self] in
-                    if let gravity = motion?.gravity {
-                        self?.rotation = atan2(gravity.x, gravity.y) - .pi
-                        print("\(self!.rotation)")
-                    }
+                    self?.handleMotion(motion, error: error)
                 }
             }
+        }
+    }
+    
+    fileprivate func handleMotion(_ motion: CMDeviceMotion?, error: Error?) {
+        if let gravity = motion?.gravity {
+            rotation = atan2(gravity.x, gravity.y) - .pi
         }
     }
     
