@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		963148441E431154004E1066 /* AirGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963148431E431154004E1066 /* AirGestureRecognizer.swift */; };
+		963148461E4311DC004E1066 /* RotationRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963148451E4311DC004E1066 /* RotationRecognizer.swift */; };
 		96E8EB5F1E41C0FF00A3CBB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E8EB5E1E41C0FF00A3CBB9 /* AppDelegate.swift */; };
 		96E8EB611E41C0FF00A3CBB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E8EB601E41C0FF00A3CBB9 /* ViewController.swift */; };
 		96E8EB641E41C0FF00A3CBB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E8EB621E41C0FF00A3CBB9 /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		963148431E431154004E1066 /* AirGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AirGestureRecognizer.swift; path = ../Source/AirGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
+		963148451E4311DC004E1066 /* RotationRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RotationRecognizer.swift; path = ../Source/RotationRecognizer.swift; sourceTree = SOURCE_ROOT; };
 		96E8EB5B1E41C0FF00A3CBB9 /* AeroDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AeroDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E8EB5E1E41C0FF00A3CBB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E8EB601E41C0FF00A3CBB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				96E8EB751E41C9D800A3CBB9 /* MotionRecognizer.swift */,
 				96E8EB771E41D4E100A3CBB9 /* TiltRecognizer.swift */,
 				96E8EB791E41EEC800A3CBB9 /* CMRotationMatrix+Transform.swift */,
+				963148431E431154004E1066 /* AirGestureRecognizer.swift */,
+				963148451E4311DC004E1066 /* RotationRecognizer.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -156,6 +162,8 @@
 			files = (
 				96E8EB7A1E41EEC800A3CBB9 /* CMRotationMatrix+Transform.swift in Sources */,
 				96E8EB781E41D4E100A3CBB9 /* TiltRecognizer.swift in Sources */,
+				963148441E431154004E1066 /* AirGestureRecognizer.swift in Sources */,
+				963148461E4311DC004E1066 /* RotationRecognizer.swift in Sources */,
 				96E8EB611E41C0FF00A3CBB9 /* ViewController.swift in Sources */,
 				96E8EB761E41C9D800A3CBB9 /* MotionRecognizer.swift in Sources */,
 				96E8EB5F1E41C0FF00A3CBB9 /* AppDelegate.swift in Sources */,
