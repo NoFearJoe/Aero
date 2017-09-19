@@ -12,7 +12,7 @@ import CoreMotion
 class ViewController: UIViewController {
 
     var v: UIImageView!
-    var r: AirGestureRecognizer!
+    var r: RotationRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,17 +23,17 @@ class ViewController: UIViewController {
         v.center = view.center
         v.backgroundColor = .brown
         view.addSubview(v)
+        v.alpha = 0.5
         
-        r = AirGestureRecognizer(subscriber: self, action: { [weak self] rec in
-            if let tiltRec = rec as? AirGestureRecognizer {
+        r = RotationRecognizer(subscriber: self, action: { [weak self] rec in
+            if let tiltRec = rec as? RotationRecognizer {
 //                if let att = tiltRec.attitude {
                     UIView.animate(withDuration: 0.05,
                                    delay: 0,
                                    options: [UIViewAnimationOptions.beginFromCurrentState, .curveEaseOut, .allowUserInteraction],
                                    animations: { [weak self] in
                                        //self?.v?.transform = CGAffineTransform(rotationAngle: CGFloat(tiltRec.rotation)) //att.transform3D(false, false, true).affineTransform
-                                       self?.v?.alpha -= 0.1
-                                    print("recognized")
+                                       self?.v?.alpha += tiltRec.airRotation.z / 50
                                    },
                                    completion: nil)
                 }

@@ -7,11 +7,26 @@
 //
 
 import CoreMotion
+import CoreGraphics
 
+
+public struct AirRotation {
+    let x: CGFloat
+    let y: CGFloat
+    let z: CGFloat
+    
+    static let zero = AirRotation(x: 0, y: 0, z: 0)
+}
 
 open class RotationRecognizer: MotionRecognizer {
     
     public var rotation: Double = 0 {
+        didSet {
+            state = .changed
+        }
+    }
+    
+    public var airRotation: AirRotation = .zero {
         didSet {
             state = .changed
         }
@@ -42,8 +57,10 @@ open class RotationRecognizer: MotionRecognizer {
     }
     
     fileprivate func handleMotion(_ motion: CMDeviceMotion?, error: Error?) {
-        if let gravity = motion?.gravity {
-            rotation = atan2(gravity.x, gravity.y) - .pi
+        if let rotationRate = motion?.rotationRate {
+            airRotation = AirRotation(x: CGFloat(rotationRate.x) * -1,
+                                      y: CGFloat(rotationRate.y) * -1,
+                                      z: CGFloat(rotationRate.z) * -1)
         }
     }
     
