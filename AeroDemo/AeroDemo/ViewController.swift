@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     var v: UIImageView!
     var r: RotationRecognizer!
     
+    var agr: AirGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -23,21 +25,27 @@ class ViewController: UIViewController {
         v.center = view.center
         v.backgroundColor = .brown
         view.addSubview(v)
-        v.alpha = 0.5
+        v.alpha = 1
         
-        r = RotationRecognizer(subscriber: self, action: { [weak self] rec in
-            if let tiltRec = rec as? RotationRecognizer {
-//                if let att = tiltRec.attitude {
-                    UIView.animate(withDuration: 0.05,
-                                   delay: 0,
-                                   options: [UIViewAnimationOptions.beginFromCurrentState, .curveEaseOut, .allowUserInteraction],
-                                   animations: { [weak self] in
-                                       //self?.v?.transform = CGAffineTransform(rotationAngle: CGFloat(tiltRec.rotation)) //att.transform3D(false, false, true).affineTransform
-                                       self?.v?.alpha += tiltRec.airRotation.z / 50
-                                   },
-                                   completion: nil)
-                }
-//            }
+//        r = RotationRecognizer(subscriber: self, action: { [weak self] rec in
+//            if let tiltRec = rec as? RotationRecognizer {
+////                if let att = tiltRec.attitude {
+//                    UIView.animate(withDuration: 0.05,
+//                                   delay: 0,
+//                                   options: [UIViewAnimationOptions.beginFromCurrentState, .curveEaseOut, .allowUserInteraction],
+//                                   animations: { [weak self] in
+//                                       //self?.v?.transform = CGAffineTransform(rotationAngle: CGFloat(tiltRec.rotation)) //att.transform3D(false, false, true).affineTransform
+//                                       self?.v?.alpha += tiltRec.airRotation.z / 50
+//                                   },
+//                                   completion: nil)
+//                }
+////            }
+//        })
+        
+        agr = AirGestureRecognizer(subscriber: self, action: { [unowned self] rec in
+            if rec.state == .changed {
+                self.v?.alpha -= 0.1
+            }
         })
     }
 

@@ -27,10 +27,10 @@ public enum MotionRecognizerState: Int {
 
 
 /// Base class for all motion recognizers
-open class MotionRecognizer: NSObject {
+open class MotionRecognizer {
 
     public typealias Subscriber = AnyHashable
-    public typealias Action = ((MotionRecognizer) -> Void)?
+    public typealias Action = (MotionRecognizer) -> Void
     
     fileprivate var subscribers: [Subscriber: Action] = [:]
     
@@ -45,14 +45,12 @@ open class MotionRecognizer: NSObject {
     }
     
     
-    public init(subscriber: Subscriber, action: Action) {
-        super.init()
-
+    public init(subscriber: Subscriber, action: @escaping Action) {
         self.subscribers[subscriber] = action
     }
     
     
-    open func subscribe(subscriber: Subscriber, action: Action) {
+    open func subscribe(subscriber: Subscriber, action: @escaping Action) {
         self.subscribers[subscriber] = action
     }
     
@@ -64,7 +62,7 @@ open class MotionRecognizer: NSObject {
     fileprivate func notifySubscribers() {
         OperationQueue.main.addOperation { [weak self] in
             guard let `self` = self else  { return }
-            self.subscribers.values.forEach { $0?(self) }
+            self.subscribers.values.forEach { $0(self) }
         }
     }
 

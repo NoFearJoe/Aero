@@ -22,15 +22,12 @@ open class TiltRecognizer: MotionRecognizer {
     }
     
     
-    fileprivate let motionManager: CMMotionManager
+    fileprivate let motionManager = CMMotionManager()
     fileprivate let operationQueue = OperationQueue()
     
     
-    override init(subscriber: Subscriber, action: Action) {
-        motionManager = CMMotionManager()
-
+    override init(subscriber: Subscriber, action: @escaping Action) {
         super.init(subscriber: subscriber, action: action)
-        
         setupMotionManager()
     }
     

@@ -27,24 +27,24 @@ open class AirGestureRecognizer: MotionRecognizer {
     var direction: AirGestureDirection = .negative
     
     
-    fileprivate let motionManager: CMMotionManager
+    fileprivate let motionManager = CMMotionManager()
     fileprivate let operationQueue = OperationQueue()
     
     
     fileprivate var recognized: Bool = false {
         didSet {
-            if recognized {
-                state = .changed
+            OperationQueue.main.addOperation {
+                if self.recognized {
+                    self.state = .changed
+                    self.state = .possible
+                }
             }
         }
     }
     
     
-    override init(subscriber: Subscriber, action: Action) {
-        motionManager = CMMotionManager()
-        
+    override init(subscriber: Subscriber, action: @escaping Action) {
         super.init(subscriber: subscriber, action: action)
-        
         setupMotionManager()
     }
     
@@ -52,10 +52,8 @@ open class AirGestureRecognizer: MotionRecognizer {
     fileprivate func setupMotionManager() {
         if motionManager.isDeviceMotionAvailable {
             motionManager.deviceMotionUpdateInterval = 0.02
-            motionManager.startDeviceMotionUpdates(to: operationQueue) { [weak self] (motion, error) in
-                OperationQueue.main.addOperation { [weak self] in
-                    self?.handleMotion(motion, error: error)
-                }
+            motionManager.startDeviceMotionUpdates(to: operationQueue) { [unowned self] (motion, error) in
+                self.handleMotion(motion, error: error)
             }
         }
     }
@@ -64,11 +62,11 @@ open class AirGestureRecognizer: MotionRecognizer {
         if let acceleration = motion?.userAcceleration {
             switch self.axis {
             case .vertical:
-                recognized = !recognized && (direction == .positive && acceleration.y >= treshold || direction == .negative && acceleration.y <= -treshold)
+                recognized = direction == .positive && acceleration.y >= treshold || direction == .negative && acceleration.y <= -treshold
             case .horizontal:
-                recognized = !recognized && (direction == .positive && acceleration.x >= treshold || direction == .negative && acceleration.x <= -treshold)
+                recognized = direction == .positive && acceleration.x >= treshold || direction == .negative && acceleration.x <= -treshold
             case .longitudinally:
-                recognized = !recognized && (direction == .positive && acceleration.z >= treshold || direction == .negative && acceleration.z <= -treshold)
+                recognized = direction == .positive && acceleration.z >= treshold || direction == .negative && acceleration.z <= -treshold
             }
         }
     }
